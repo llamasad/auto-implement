@@ -13,8 +13,10 @@ ARG JENKINS_HOME_USER_ID
 ARG JENKINS_HOME_GROUP_ID
 
 # Use the build arguments to create the user and group
-RUN addgroup -g ${JENKINS_HOME_GROUP_ID} jenkins && \
-    adduser -D -u ${JENKINS_HOME_USER_ID} -G jenkins jenkins
+RUN if ! getent group ${JENKINS_HOME_GROUP_ID}; then addgroup -g ${JENKINS_HOME_GROUP_ID} jenkins; fi && \
+    if ! getent passwd ${JENKINS_HOME_USER_ID}; then adduser -D -u ${JENKINS_HOME_USER_ID} -G jenkins jenkins; fi
 
 # Set the user
 USER jenkins
+
+# Your application code and other commands go here
