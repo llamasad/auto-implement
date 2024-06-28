@@ -1,22 +1,17 @@
-pipeline {
-    agent any
-    stages {
-        stage('Build') {
-            steps {
-                sh './gradlew build'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh './gradlew check'
-            }
-        }
-    }
 
-    post {
-        always {
-            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
-            junit 'build/reports/**/*.xml'
+
+/* Requires the Docker Pipeline plugin */
+pipeline {
+    agent { docker { 
+        image 'node:20.15.0-alpine3.20'
+        args '-u root:root' 
+    } }
+    stages {
+        stage('build') {
+            steps {
+                sh 'node --version'
+            }
         }
     }
 }
+
