@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'datdo27122003/custom-jenkins:latest'
-            args '-u root:root'  // Use root user to avoid permission issues
+            args '-u 1000:1000'  // Use root user to avoid permission issues
         }
     }
     stages {
