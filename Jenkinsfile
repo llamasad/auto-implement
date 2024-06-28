@@ -1,26 +1,15 @@
+
+
+/* Requires the Docker Pipeline plugin */
 pipeline {
-    agent {
-        docker {
-            image 'datdo27122003/custom-jenkins:latest'
-            args '-u 1000:1000'  // Use root user to avoid permission issues
-        }
-    }
+    agent { docker { image 'node:20.15.0-alpine3.20',
+    args '-u root:root' } }
     stages {
-        stage('Build') {
+        stage('build') {
             steps {
-                script {
-                    // Building your application code
-                    sh 'echo "Building application..."'
-                }
-            }
-        }
-        stage('Test') {
-            steps {
-                script {
-                    // Running tests
-                    sh 'echo "Running tests..."'
-                }
+                sh 'node --version'
             }
         }
     }
 }
+

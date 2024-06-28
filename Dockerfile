@@ -1,22 +1,26 @@
-# Define build-time arguments for user ID and group ID
-ARG JENKINS_HOME_USER_ID
-ARG JENKINS_HOME_GROUP_ID
-
-# Use an appropriate base image
+# Use the official Jenkins LTS image as a base
 FROM node:20.15.0-alpine3.20
 
-# Install necessary tools
+# Set user and group IDs based on host system
+ARG JENKINS_HOME_USER_ID=1000
+ARG JENKINS_HOME_GROUP_ID=1000
+
+# Install necessary packages
 RUN apk add --no-cache shadow
 
-# Explicitly declare the build arguments as environment variables
-ARG JENKINS_HOME_USER_ID
-ARG JENKINS_HOME_GROUP_ID
+# Create the jenkins group with matching IDs
+RUN if getent group ${JENKINS_HOME_GROUP_ID} >/dev/null 2>&1; then \
+      echo "Group exists"; \
+    else \
+      addgroup -g ${JENKINS_HOME_GROUP_ID} jenkins && echo "Group created"; \
+    fi
 
-# Use the build arguments to create the user and group
-RUN if ! getent group ${JENKINS_HOME_GROUP_ID}; then addgroup -g ${JENKINS_HOME_GROUP_ID} jenkins; fi && \
-    if ! getent passwd ${JENKINS_HOME_USER_ID}; then adduser -D -u ${JENKINS_HOME_USER_ID} -G jenkins jenkins; fi
+# Create the jenkins user with matching IDs and add to the jenkins group
+RUN if id -u ${JENKINS_HOME_USER_ID} >/dev/null 2>&1; then \
+      echo "User exists"; \
+    else \
+      adduser -D -u ${JENKINS_HOME_USER_ID} -G jenkins -h /home/jenkins -s /bin/sh jenkins && echo "User created"; \
+    fi
 
-# Set the user
+# Ensure Jenkins runs with the correct user
 USER jenkins
-
-# Your application code and other commands go here
