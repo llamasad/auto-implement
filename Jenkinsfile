@@ -1,19 +1,16 @@
 pipeline {
-    agent {
-        docker {
+    agent { 
+        docker { 
             image 'node:20.15.0-alpine3.20'
-            args '-u root:root'
-            reuseNode true  // This option keeps the container running after the pipeline finishes
-        }
+            args '-u root:root' 
+        } 
     }
     stages {
         stage('build') {
             steps {
                 sh 'node --version'
+                sh 'sleep 3600' // keeps the container running for 1 hour
             }
         }
-    }
-    options {
-        skipDefaultCheckout(true)  // Skip checking out code from source repository
     }
 }
