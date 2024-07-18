@@ -1,15 +1,16 @@
 pipeline {
-    agent { 
-        docker { 
+    agent {
+        docker {
             image 'node:20.15.0-alpine3.20'
-            args '-u root:root' 
-        } 
+            args '-u root:root -p 3000:3000'
+        }
     }
     stages {
         stage('build') {
             steps {
                 sh 'node --version'
-                sh 'sleep 3600' // keeps the container running for 1 hour
+                // keeps the container running for 1 hour
+                sh 'npm install'
             }
         }
     }
