@@ -19,11 +19,11 @@ pipeline {
                 withCredentials([file(credentialsId: 'main_key_pair', variable: 'main_key_pair')]) {
                     sh 'ls -la'
                     sh """
-                    if [ -f "main_key_pair" ]; then
+                    if [ -f "main_key_pair.pem" ]; then
                         echo "File exists: main_key_pair"
                     else
                         cp "$MAIN_KEY_PAIR" main_key_pair.pem
-                        chmod 400 main_key_pair
+                        chmod 400 main_key_pair.pem
                     fi
                     """
                     sh 'ansible --version'
