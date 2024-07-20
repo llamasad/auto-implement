@@ -18,12 +18,18 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'main_key_pair', variable: 'main_key_pair')]) {
                     sh 'ls -la'
-                    sh "cp /$main_key_pair main_key_pair"
+                    sh """
+                    if [ -f "main_key_pair" ]; then
+                        echo "File exists: main_key_pair"
+                    else
+                        echo "File does not exist: main_key_pair"
+                    fi
+                    """
                     sh 'cat main_key_pair'
                     sh 'ansible --version'
                     sh 'ls -la'
-                    sh 'chmod 400 main_key_pair '
-                    sh 'ansible-playbook -i inventory.ini --private-key main_key_pair playbook.yml'
+                    sh 'chmod 400 main_key_pair 'y
+                    sh 'ansible-playbook -i inventory.ini --private-ke main_key_pair playbook.yml'
                 }
             }
           }
