@@ -25,7 +25,6 @@ pipeline {
                         echo "File does not exist: main_key_pair"
                     fi
                     """
-                    sh 'cat main_key_pair'
                     sh 'ansible --version'
                     sh 'ls -la'
                     sh 'chmod 400 main_key_pair 'y
