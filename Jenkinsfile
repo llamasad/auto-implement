@@ -13,7 +13,7 @@ pipeline {
                 }
             }
         }
-          stage('Deploy Mysql container') {
+          stage('Deploy container') {
            
             steps {
                 withCredentials([file(credentialsId: 'main_key_pair', variable: 'main_key_pair')]) {
