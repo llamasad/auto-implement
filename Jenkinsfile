@@ -7,8 +7,8 @@ pipeline {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', 'Dockerhub') {
                         sh 'ls -l'
-                        sh 'docker build -t datdo2712003/nodejs-env .'
-                        sh 'docker push datdo2712003/nodejs-env'
+                        sh 'docker build -t datdo27122003/nodejs-env .'
+                        sh 'docker push datdo27122003/nodejs-env'
                     }
                 }
             }
