@@ -22,13 +22,14 @@ pipeline {
                     if [ -f "main_key_pair" ]; then
                         echo "File exists: main_key_pair"
                     else
-                        echo "File does not exist: main_key_pair"
+                        cp "$MAIN_KEY_PAIR" main_key_pair.pem
+                        chmod 400 main_key_pair
                     fi
                     """
                     sh 'ansible --version'
                     sh 'ls -la'
                     sh 'chmod 400 main_key_pair '
-                    sh 'ansible-playbook -i inventory.ini --private-key main_key_pair playbook.yml -vvvv'
+                    sh 'ansible-playbook -i inventory.ini --private-key main_key_pair.pem playbook.yml -vvvv'
                 }
             }
           }
