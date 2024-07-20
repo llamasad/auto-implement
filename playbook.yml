@@ -1,6 +1,6 @@
 - name: ec2instance-playbook
   hosts: hosts
-  become: yes
+  become: true
   become_user: root
   become_method: sudo
   tasks:

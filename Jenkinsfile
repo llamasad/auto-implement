@@ -28,7 +28,8 @@ pipeline {
                     sh 'ansible --version'
                     sh 'ls -la'
                     sh 'chmod 400 main_key_pair '
-                    sh 'ansible-playbook -i inventory.ini --private-ke main_key_pair playbook.yml'
+                    sh 'ansible-playbook -i inventory.ini --private-key main_key_pair playbook.yml -vvvv
+'
                 }
             }
           }
