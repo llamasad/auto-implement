@@ -59,4 +59,3 @@ docker run -it -p 8080:8080 -p 50000:50000 \
 
 Feel free to adapt these instructions as needed for your specific setup and environment.
 
-```
