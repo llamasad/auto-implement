@@ -17,7 +17,7 @@
 - **Create Pipelines**:
   - Create a multiple pineline
   - Add source control from GitHub using the GitHub access token.
-  - Choose the webhook option to trigger builds from GitHub commits.
+  - Choose the webhook option to trigger builds from wildcard .
 
 ## Steps to Run
 
