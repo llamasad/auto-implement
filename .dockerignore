@@ -1,0 +1,12 @@
+node_modules/
+
+Jenkinsfile
+
+playbook.yml
+
+inventory.ini
+
+README.md
+
+.vscode
+
